@@ -399,7 +399,7 @@ else()
   message("libdir=${libdir}")
   message("incdir=${incdir}")
   message("ROOT_ARCHITECTURE=${ROOT_ARCHITECTURE}")
-  execute_process(COMMAND ${CMAKE_SOURCE_DIR}/build/unix/compiledata.sh
+  execute_process(COMMAND bash -x ${CMAKE_SOURCE_DIR}/build/unix/compiledata.sh
     ${CMAKE_BINARY_DIR}/include/compiledata.h "${CMAKE_CXX_COMPILER}"
         "${CMAKE_CXX_FLAGS_RELEASE}" "${CMAKE_CXX_FLAGS_DEBUG}" "${CMAKE_CXX_FLAGS}"
         "${CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS}" "${CMAKE_EXE_FLAGS}" "so"
