@@ -377,14 +377,28 @@ endif()
 #---compiledata.h--------------------------------------------------------------------------------------------
 
 if(APPLE AND runtime_cxxmodules)
+  message("!!!!!!!!!!!!!!!!!! APPLE Case !!!!!!!!!!!!!!!!!!!")
   # Modules have superior dynamic linker and they can resolve undefined symbols upon library loading.
   set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "${CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS} -undefined dynamic_lookup")
 endif()
 
 if(WIN32)
   # We cannot use the compiledata.sh script for windows
+  message("!!!!!!!!!!!!!!!!!! WINS32 Case !!!!!!!!!!!!!!!!!!!")
   configure_file(${CMAKE_SOURCE_DIR}/cmake/scripts/compiledata.win32.in ${CMAKE_BINARY_DIR}/include/compiledata.h NEWLINE_STYLE UNIX)
 else()
+  message("!!!!!!!!!!!!!!!!!! else Case !!!!!!!!!!!!!!!!!!!")
+  message("CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR}")
+  message("CMAKE_BINARY_DIR=${CMAKE_BINARY_DIR}")
+  message("CMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}")
+  message("CMAKE_CXX_FLAGS_RELEASE=${CMAKE_CXX_FLAGS_RELEASE}")
+  message("CMAKE_CXX_FLAGS_DEBUG=${CMAKE_CXX_FLAGS_DEBUG}")
+  message("CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}")
+  message("CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS=${CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS}")
+  message("CMAKE_EXE_FLAGS=${CMAKE_EXE_FLAGS}")
+  message("libdir=${libdir}")
+  message("incdir=${incdir}")
+  message("ROOT_ARCHITECTURE=${ROOT_ARCHITECTURE}")
   execute_process(COMMAND ${CMAKE_SOURCE_DIR}/build/unix/compiledata.sh
     ${CMAKE_BINARY_DIR}/include/compiledata.h "${CMAKE_CXX_COMPILER}"
         "${CMAKE_CXX_FLAGS_RELEASE}" "${CMAKE_CXX_FLAGS_DEBUG}" "${CMAKE_CXX_FLAGS}"
